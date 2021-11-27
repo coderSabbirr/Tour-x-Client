@@ -4,10 +4,10 @@
 
 ## Overview
 
-• Service Website including admin panel to add or remove services.
-• Option for admin to add more services to home page.
-• Admin can remove or add products
-• Admin can delete or confirm the order
+• User will be able to login</br>
+• Service Website including admin panel to add or remove services.</br>
+• Option for admin to add more services to home page.</br>
+• Admin can delete or confirm the order</br>
 
 ## Technology :
 
