@@ -11,7 +11,7 @@
 
 ## Technology :
 
-Html, Vanilla CSS, Bootstrap, React.js, Material UI, Node.js, Express.js, MongoDB, Firebase,Heroku
+Html, Vanilla CSS, Bootstrap, React.js, React Hook Form, Node.js, Express.js, MongoDB, Firebase,Heroku
 
 ## 💻 Developed By
 
