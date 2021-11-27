@@ -1,12 +1,11 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import './AllPackage.css'
+import React, { useEffect, useState } from 'react';
+import './AllPackage.css';
 import PackageCart from './PackageCart/PackageCart';
 const TourPackages = () => {
     const[tourPackages,setTourPackages]=useState([])
 
     useEffect(()=>{
-        fetch('https://mighty-forest-85314.herokuapp.com/packages')
+        fetch('https://young-waters-54180.herokuapp.com/packages')
         .then(res=>res.json())
         .then(data=>setTourPackages(data))
     },[])

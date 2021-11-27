@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import './mangeOrder.css';
 import SingleOrderCart from './SingleOrderCart/SingleOrderCart';
-import './mangeOrder.css'
 
 const MangeOrder = () => {
     const[Orders,setOrders] =useState([])
 
     useEffect(() => {
-fetch('https://mighty-forest-85314.herokuapp.com/orders')
+fetch('https://young-waters-54180.herokuapp.com/orders')
 .then(res => res.json())
 .then((data) =>setOrders(data))
     },[])

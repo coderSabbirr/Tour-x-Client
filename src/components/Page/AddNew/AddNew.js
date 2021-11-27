@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2';
+import './AddNew.js.css';
 import NewPackage from './newPackage/NewPackage';
-import './AddNew.js.css'
 
 const AddNew = () => {
     const [addnewpackages, setAddnewpackages] = useState([])
 
     useEffect(() => {
-        fetch('https://mighty-forest-85314.herokuapp.com/addnew/newpackage')
+        fetch('https://young-waters-54180.herokuapp.com/addnew/newpackage')
             .then((res) => res.json())
             .then(data => setAddnewpackages(data))
     }, [])
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit,reset } = useForm();
     const newpackage = "newpackage"
     const onSubmit = (data) => {
         data.newpackage = newpackage;
-        fetch("https://mighty-forest-85314.herokuapp.com/addpackages", {
+        fetch("https://young-waters-54180.herokuapp.com/addpackages", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify(data),
         })
             .then((res) => res.json())
             .then((result) => {
-              
-                    alert('added Successfully');
+                reset();
+                Swal.fire(
+                    'Good job!',
+                    'Add your Package successfully',
+                    'success'
+                  )
                     window.location.reload();
                 
             });

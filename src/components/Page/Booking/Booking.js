@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useParams } from 'react-router';
+import Swal from 'sweetalert2';
 import useAuth from '../../../hooks/useAuth';
-import './Booking.css'
+import './Booking.css';
 
 const Booking = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors },reset } = useForm();
     const { user } = useAuth();
     const { bookingId } = useParams();
     const [booking, setBooking] = useState([])
 
     useEffect(() => {
-        const url = `https://mighty-forest-85314.herokuapp.com/packages/${bookingId}`
+        const url = `https://young-waters-54180.herokuapp.com/packages/${bookingId}`
         fetch(url)
             .then(res => res.json())
             .then(data => setBooking(data))
-    }, [])
+    }, [bookingId])
 
     // const status ="Pending"
     
@@ -27,16 +28,21 @@ const Booking = () => {
         data.status=update;
         data.package_details=booking;
         data.email = user?.email;
-        fetch("https://mighty-forest-85314.herokuapp.com/packages", {
+        fetch("https://young-waters-54180.herokuapp.com/packages", {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify(data),
         })
           .then((res) => res.json())
           .then((result) => {
-              
+              reset();
+             
           });
-          alert("Order successfull")
+          Swal.fire(
+            'Good job!',
+            'Order successfull',
+            'success'
+          )
        
       };
     
@@ -60,16 +66,16 @@ const Booking = () => {
                
                     <form className="shipping-form" onSubmit={handleSubmit(onSubmit)} >
 
-                        <input defaultValue={user.displayName} {...register("full_name")} />
+                        <input defaultValue={user.displayName} {...register("full_name",{ required: true })} />
                         <br />
                         <input defaultValue={user.email} {...register("email", { required: true })} />
                         <br />
                         {errors.email && <span className="error">This field is required</span>}
-                        <input placeholder="Address" defaultValue="" {...register("address")} />
+                        <input placeholder="Address" defaultValue="" {...register("address",{ required: true })} />
                         <br />
-                        <input placeholder="City" defaultValue="" {...register("city")} />
+                        <input placeholder="City" defaultValue="" {...register("city",{ required: true })} />
                         <br />
-                        <input placeholder="phone number" defaultValue="" {...register("phone")} />
+                        <input placeholder="phone number" defaultValue="" {...register("phone",{ required: true })} />
                         <br />
                         <input type="submit" value="Confirm" className="submit-btn" />
                     </form>

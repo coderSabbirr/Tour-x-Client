@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
+import './myorders.css';
 import Order from './Order/Order';
-import './myorders.css'
 
 const MyOrders = () => {
     const { user } = useAuth();
     const [myOrders, SetOrders] = useState([])
     useEffect(() => {
-        const url = `https://mighty-forest-85314.herokuapp.com/orders/${user.email}`
+        const url = `https://young-waters-54180.herokuapp.com/orders/${user.email}`
         fetch(url)
             .then(res => res.json())
             .then(data => SetOrders(data))
 
-    }, [])
+    }, [user])
 
 
 

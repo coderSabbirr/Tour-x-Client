@@ -1,10 +1,25 @@
 import React from 'react';
-import './Order.css'
+import Swal from 'sweetalert2';
+import './Order.css';
 const Order = ({order}) => {
     const handleDelete =(id,e) =>{
-        if (window.confirm("Delete the item?")) {
-            
-            const url=`https://mighty-forest-85314.herokuapp.com/orders/${id}`
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              const url=`https://young-waters-54180.herokuapp.com/orders/${id}`
             fetch(url,{
                 method:'DELETE'
             })
@@ -13,11 +28,9 @@ const Order = ({order}) => {
             .then(data => {
                 window.location.reload();
             })
-            
-        }
-        else{
-            return;
-        }
+
+            }
+          })
        
     }
     const{package_details}=order;
